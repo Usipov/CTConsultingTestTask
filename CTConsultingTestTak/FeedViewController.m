@@ -50,6 +50,7 @@
 }
 -(void)signOut: (UIBarButtonItem *)sender
 {
+    _frc.delegate = nil;
     [FeedRecord deleteAllInManagedObjectContext: [CoreDataManager sharedManager].mainManagedObjectContext];
     [[CoreDataManager sharedManager] saveMainManagedObjectContext];
     AuthentificationManager.sharedManager.userToken = @"";
@@ -214,7 +215,7 @@
     if (indexPath.row == _frc.fetchedObjects.count) {
         return 44.0f;
     } else {
-        return 364.0f;
+        return FeedCellHeight;
     }
 }
 
