@@ -39,10 +39,14 @@
 {
     UIViewController *vc = nil;
     
-    if (! AuthentificationManager.sharedManager.userToken) {
-        vc = [AuthentificationViewController new];
-    } else {
+    if (AuthentificationManager.sharedManager.userToken.length) {
         vc = [[FeedViewController alloc] initWithStyle: UITableViewStylePlain];
+    } else {
+        AuthentificationViewController *viewController = [AuthentificationViewController new];
+        if (AuthentificationManager.sharedManager.userToken) {
+            [viewController signOut];
+        }
+        vc = viewController;
     }
     return vc;
 }

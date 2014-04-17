@@ -43,8 +43,14 @@
 
     self.navigationItem.title = NSLocalizedString(@"feed", nil);
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemRefresh target: self action: @selector(refresh)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"sign out", nil) style: UIBarButtonItemStylePlain target: self action: @selector(signOut:)];
 }
-
+-(void)signOut: (UIBarButtonItem *)sender
+{
+    [FeedRecord deleteAllInManagedObjectContext: [CoreDataManager sharedManager].mainManagedObjectContext];
+    [[CoreDataManager sharedManager] saveMainManagedObjectContext];
+    AuthentificationManager.sharedManager.userToken = @"";
+}
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear: animated];
@@ -80,9 +86,8 @@
 
 -(void)loadFeeds
 {
-    //success block
+    //success block (parses data in a background thread)
     DownloaderFinishBlock finishBLock = ^(NSArray *feeds, NSString *nextMaxID) {
-        //parse data in a background thread
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSManagedObjectContext *context2 = [[CoreDataManager sharedManager] newManagedObjectContext];
             [feeds enumerateObjectsUsingBlock: ^(NSDictionary *feedData, NSUInteger idx, BOOL *stop) {
@@ -117,7 +122,7 @@
         [self performSelector: @selector(loadFeeds) withObject: nil afterDelay: 4];
     };
     
-    //actually load
+    //now load feeds
     if (_nextMaxID != [NSNull null]) {
         FeedRecord *lastRecord = [_frc.fetchedObjects lastObject];
         if (lastRecord) {

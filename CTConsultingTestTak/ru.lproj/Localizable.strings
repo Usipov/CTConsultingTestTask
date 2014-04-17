@@ -10,6 +10,7 @@
 "feed" = "Лента";
 "tap to load" = "Нажмите для загрузки";
 "reached end" = "Ячеек в ленте: %i";
+"sing out" = "Выйти";
 
 "ErorrDescriptionWhileParsing" = "Не удолось разоброть JSON";
 "ErrorFailureReasonWhileParsing" = "Разбор JSON'а не реализован в вашей версии iOS";

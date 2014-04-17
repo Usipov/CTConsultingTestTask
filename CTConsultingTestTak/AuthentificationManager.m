@@ -36,16 +36,12 @@ NSString *const AuthentificationStateDidChangeNotification = @"AuthentificationS
 
 -(void)setUserToken:(NSString *)userToken
 {
-    if (_userToken != userToken || ! [_userToken isEqualToString: userToken]) {
-        _userToken = userToken;
-        
-        [[NSUserDefaults standardUserDefaults] setObject: userToken forKey: AuthentificationTokenKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName: AuthentificationStateDidChangeNotification object: nil];
-        });
-    }
+    _userToken = userToken;
+    
+    [[NSUserDefaults standardUserDefaults] setObject: userToken forKey: AuthentificationTokenKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: AuthentificationStateDidChangeNotification object: nil];
 }
 
 

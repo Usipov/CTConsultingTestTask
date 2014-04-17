@@ -10,6 +10,7 @@
 "feed" = "Feed";
 "tap to load" = "Tap to load more";
 "reached end" = "Feeds loaded: %i";
+"sing out" = "Sign out";
 
 "ErorrDescriptionWhileParsing" = "Failed to parse JSON";
 "ErrorFailureReasonWhileParsing" = "JSON parsing is not implemented within your iOS version";
