@@ -54,9 +54,9 @@
     
     _likesString = [NSMutableString stringWithFormat: NSLocalizedString(@"likes", nil), feedItem.likesCount.integerValue];
     [feedItem.likersPreview enumerateObjectsUsingBlock: ^(User *user, BOOL *stop) {
-        [_likesString appendFormat: @"%@ ,", user.userName];
+        [_likesString appendFormat: @"%@, ", user.userName];
     }];
-    [_likesString replaceCharactersInRange: NSMakeRange(_likesString.length - 2, 2) withString: @""]; //remove last @" ,"
+    [_likesString replaceCharactersInRange: NSMakeRange(_likesString.length - 2, 2) withString: @""]; //remove last @", "
     
     _commentsString = [NSMutableString stringWithFormat: @"%@: %@\n", feedItem.user.userName, feedItem.caption.text];
     [_commentsString appendFormat: NSLocalizedString(@"comments", nil), feedItem.commentsCount.integerValue];
