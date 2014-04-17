@@ -20,6 +20,7 @@
     UITableView *_tableView;
     NSFetchedResultsController *_frc;
     __block NSString *_nextMaxID;
+    __block BOOL _shouldSeekForMaxID;
 }
 
 -(void)loadFeeds;
@@ -34,6 +35,7 @@
     self = [super initWithStyle: style];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(mergeContexts:) name: NSManagedObjectContextDidSaveNotification object: nil];
+        _shouldSeekForMaxID = YES;
     }
     return self;
 }
@@ -89,6 +91,17 @@
 {
     //success block (parses data in a background thread)
     DownloaderFinishBlock finishBLock = ^(NSArray *feeds, NSString *nextMaxID) {
+        if (! nextMaxID) {
+            _nextMaxID = [NSNull null];
+            [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: _frc.fetchedObjects.count inSection: 0]] withRowAnimation: UITableViewRowAnimationFade];
+        } else {
+            _nextMaxID = nextMaxID;
+            _shouldSeekForMaxID = YES;
+        }
+        //enable refresh button
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSManagedObjectContext *context2 = [[CoreDataManager sharedManager] newManagedObjectContext];
             [feeds enumerateObjectsUsingBlock: ^(NSDictionary *feedData, NSUInteger idx, BOOL *stop) {
@@ -97,30 +110,15 @@
             
             [[CoreDataManager sharedManager] saveManagedObjectContext: context2];
             context2 = nil;
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (! nextMaxID) {
-                    _nextMaxID = [NSNull null];
-                    [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: _frc.fetchedObjects.count inSection: 0]] withRowAnimation: UITableViewRowAnimationFade];
-                } else {
-                    _nextMaxID = nextMaxID;
-                }
-                
-                //enable refresh button
-                self.navigationItem.rightBarButtonItem.enabled = YES;
-                self.navigationItem.leftBarButtonItem.enabled = YES;
-            });
         });
     };
     
     //error block
     DownloaderFailBlock failBlock = ^(NSError *error) {
         //enable refresh button
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.navigationItem.rightBarButtonItem.enabled = YES;
-            self.navigationItem.leftBarButtonItem.enabled = YES;
-        });
-
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+        
         //try loading later
         [self performSelector: @selector(loadFeeds) withObject: nil afterDelay: 4];
     };
@@ -144,10 +142,10 @@
 
 -(void)refresh
 {
+    _nextMaxID = nil;
+    _shouldSeekForMaxID = NO;
     [FeedRecord deleteAllInManagedObjectContext: [CoreDataManager sharedManager].mainManagedObjectContext];
     [[CoreDataManager sharedManager] saveMainManagedObjectContext];
-    
-    _nextMaxID = nil;
     [self.tableView reloadRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: 0 inSection: 0]] withRowAnimation: UITableViewRowAnimationFade];
 }
 

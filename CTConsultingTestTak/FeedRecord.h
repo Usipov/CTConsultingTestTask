@@ -17,6 +17,13 @@ typedef NS_ENUM(NSUInteger, ImageQuality) {
     ImageQualityThumb //150x150
 };
 
+typedef NS_ENUM(NSUInteger, VideoResolutionType) {
+    VideoResolutionStandard,
+    VideoResolutionLow,
+};
+
+
+
 @class FeedCommentsItem, User, FeedCaptionItem, ImageData;
 
 @interface FeedRecord : NSManagedObject
@@ -44,6 +51,8 @@ typedef NS_ENUM(NSUInteger, ImageQuality) {
 +(void)deleteAllInManagedObjectContext: (NSManagedObjectContext *)context;
 +(NSFetchedResultsController *)fetchedResultsContollerInManagedObjectContext: (NSManagedObjectContext *)context;
 -(ImageData *)imageDataForImageQuality: (ImageQuality)quality;
+-(ImageData *)videoDataForVideoResolution: (VideoResolutionType)resolution;
+
 @end
 
 #pragma mark -
@@ -62,9 +71,18 @@ typedef NS_ENUM(NSUInteger, ImageQuality) {
 
 @end
 
-#pragma mark - 
+#pragma mark -
 
 @interface ImageData : NSObject
+
+@property (nonatomic, retain) NSString *url;
+@property (nonatomic, assign) CGSize size;
+
+@end
+
+#pragma mark -
+
+@interface VideoData : NSObject
 
 @property (nonatomic, retain) NSString *url;
 @property (nonatomic, assign) CGSize size;

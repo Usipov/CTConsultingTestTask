@@ -87,6 +87,7 @@ NSString *const FeedRecordCacheName = @"FeedRecordCache";
     record.userHasLiked = data[@"user_has_liked"];
     record.usersInPhoto = data[@"users_in_photo"];
     record.identifier = identifier;
+    record.videos = data[@"videos"];
     
     //set advanced properties
     [record setCaptionBasedOnData: data[@"caption"] inManagedObjectContext: context];
@@ -141,6 +142,31 @@ NSString *const FeedRecordCacheName = @"FeedRecordCache";
 
     ImageData *data = [ImageData new];
     data.url = self.images[key][@"url"];
+    data.size = CGSizeMake([self.images[key][@"width"] floatValue],
+                           [self.images[key][@"height"] floatValue]);
+    
+    return data;
+}
+
+-(ImageData *)videoDataForVideoResolution: (VideoResolutionType)resolution
+{
+    NSString *key;
+    
+    switch (resolution) {
+        case VideoResolutionLow:
+            key = @"low_resolution";
+            break;
+        case VideoResolutionStandard:
+            key = @"standard_resolution";
+            break;
+        default:
+            break;
+    }
+    
+    NSParameterAssert(key);
+    
+    VideoData *data = [VideoData new];
+    data.url = self.videos[key][@"url"];
     data.size = CGSizeMake([self.images[key][@"width"] floatValue],
                            [self.images[key][@"height"] floatValue]);
     
@@ -205,8 +231,14 @@ NSString *const FeedRecordCacheName = @"FeedRecordCache";
 
 @end
 
-#pragma mark - 
+#pragma mark -
 
 @implementation ImageData
+
+@end
+
+#pragma mark -
+
+@implementation VideoData
 
 @end

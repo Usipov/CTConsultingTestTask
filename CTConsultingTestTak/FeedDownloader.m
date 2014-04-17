@@ -56,13 +56,6 @@
     _connection = nil;
 }
 
--(void)startLoading
-{
-    if (_downloadUrl) {
-
-    }
-}
-
 #pragma mark - NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

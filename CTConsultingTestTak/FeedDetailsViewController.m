@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Timur. All rights reserved.
 //
 
+#import <MediaPlayer/MediaPlayer.h>
 #import "FeedDetailsViewController.h"
 #import "CoreDataManager.h"
 #import "ThumbCache.h"
@@ -15,7 +16,10 @@
 @interface FeedDetailsViewController () {
     NSMutableString *_likesString;
     NSMutableString *_commentsString;
+    UIBarButtonItem *_playVideoButton;
 }
+
+-(void)play: (UIBarButtonItem *)sender;
 
 @end
 
@@ -35,12 +39,13 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"details", nil);
+    self.navigationItem.rightBarButtonItem = _playVideoButton;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
+    [[ThumbCache sharedCache] removeAllObjects];
 }
 
 -(void)setFeedItem:(FeedRecord *)feedItem
@@ -58,6 +63,20 @@
     [feedItem.comments enumerateObjectsUsingBlock: ^(FeedCommentsItem *comment, BOOL *stop) {
         [_commentsString appendFormat: @"%@: %@\n", comment.fromUser.userName, comment.text];
     }];
+    
+    if ([feedItem.type isEqualToString: @"video"]) {
+        _playVideoButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemPlay target: self action: @selector(play:)];
+        self.navigationItem.rightBarButtonItem = _playVideoButton;
+    }
+}
+
+#pragma mark - extenstions
+
+-(void)play: (UIBarButtonItem *)sender
+{
+    NSURL *url = [NSURL URLWithString: [_feedItem videoDataForVideoResolution: VideoResolutionStandard].url];
+    MPMoviePlayerViewController *player = [[MPMoviePlayerViewController alloc] initWithContentURL: url];
+    [self presentMoviePlayerViewControllerAnimated: player];
 }
 
 #pragma mark - Table view data source
