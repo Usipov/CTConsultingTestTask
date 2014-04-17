@@ -2,7 +2,7 @@
 //  FeedViewCell.h
 //  CTConsultingTestTask
 //
-//  Created by Ultimatum on 17.04.14.
+//  Created by Timur on 17.04.14.
 //  Copyright (c) 2014 Timur. All rights reserved.
 //
 
@@ -10,6 +10,7 @@
 #import "ThumbView.h"
 
 extern NSString *const FeedCellReuseID;
+extern CGFloat const FeedCellHeight;
 
 @interface FeedCell : UITableViewCell
 

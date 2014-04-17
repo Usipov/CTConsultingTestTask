@@ -2,13 +2,14 @@
 //  FeedViewCell.m
 //  CTConsultingTestTask
 //
-//  Created by Ultimatum on 17.04.14.
+//  Created by Timur on 17.04.14.
 //  Copyright (c) 2014 Timur. All rights reserved.
 //
 
 #import "FeedCell.h"
 
 NSString *const FeedCellReuseID = @"general cell";
+CGFloat const FeedCellHeight = 364.0f;
 
 @implementation FeedCell
 
@@ -84,7 +85,7 @@ NSString *const FeedCellReuseID = @"general cell";
     contentThumbFrame.origin.x = 0.0;
     contentThumbFrame.origin.y = CGRectGetMaxY(self.textLabel.bounds);
     contentThumbFrame.size.width = CGRectGetWidth(self.bounds);
-    contentThumbFrame.size.height = CGRectGetHeight(self.bounds) - contentThumbFrame.origin.y;
+    contentThumbFrame.size.height = FeedCellHeight - contentThumbFrame.origin.y;
     self.contentPreviewView.frame = contentThumbFrame;
     
 }

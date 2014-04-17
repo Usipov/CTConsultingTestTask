@@ -2,7 +2,7 @@
 //  FeedRecord.m
 //  CTConsultingTestTask
 //
-//  Created by Ultimatum on 17.04.14.
+//  Created by Timur on 17.04.14.
 //  Copyright (c) 2014 Timur. All rights reserved.
 //
 
@@ -75,7 +75,7 @@ NSString *const FeedRecordCacheName = @"FeedRecordCache";
     
     //set primitive properties
     record.attribution = data[@"attribution"];
-    record.commentsCount = data[@"comment"][@"count"];
+    record.commentsCount = data[@"comments"][@"count"];
     record.createdTime = data[@"created_time"];
     record.filter = data[@"filter"];
     record.images = data[@"images"];

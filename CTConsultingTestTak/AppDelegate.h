@@ -2,7 +2,7 @@
 //  AppDelegate.h
 //  CTConsultingTestTak
 //
-//  Created by Ultimatum on 16.04.14.
+//  Created by Timur on 16.04.14.
 //  Copyright (c) 2014 Timur. All rights reserved.
 //
 

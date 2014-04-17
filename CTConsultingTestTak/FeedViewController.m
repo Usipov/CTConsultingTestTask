@@ -14,6 +14,7 @@
 #import "FeedCell.h"
 #import "PlaceHolderCell.h"
 #import "ThumbCache.h"
+#import "FeedDetailsViewController.h"
 
 @interface FeedViewController () <NSFetchedResultsControllerDelegate> {
     UITableView *_tableView;
@@ -196,29 +197,14 @@
         //user profile image
         ThumbRequest *request = [[ThumbRequest alloc] initWithThumbDownloadURL: feed.user.profilePicture thumbView: feedCell.userProfilePictureView thumbSize: CGSizeMake(30.0, 30.0f)];
         feedCell.userProfilePictureView.thumb = [[ThumbCache sharedCache] thumbImageForRequest: request];
-        cell = feedCell;
         
         //content image
-        ImageData *imageData = [feed imageDataForImageQuality: ImageQualityStandard];
+        ImageData *imageData = [feed imageDataForImageQuality: ImageQualityLow];
         request = [[ThumbRequest alloc] initWithThumbDownloadURL: imageData.url thumbView: feedCell.contentPreviewView thumbSize: CGSizeMake(320.0f, 320.0f)];
         feedCell.contentPreviewView.thumb = [[ThumbCache sharedCache] thumbImageForRequest: request];
+        
+        cell = feedCell;
     }
-//    Hotel *hotel = _frc.fetchedObjects[indexPath.row];
-//    HotelCell *cell = (HotelCell *)[tableView dequeueReusableCellWithIdentifier: HotelCellReuseID];
-//    if (! cell) {
-//        cell = [[HotelCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: HotelCellReuseID];
-//    }
-    
-//    //prepare a cell for getting thumb
-//    cell.thumbUrl = hotel.thumbnail_url;
-//    
-//    //set thumb
-//    ThumbRequest *request = [[ThumbRequest alloc] initWithThumbDownloadURL: hotel.thumbnail_url thumbView: cell.thumbView thumbSize: cell.thumbSize];
-//    cell.thumbView.thumb = [[ThumbCache sharedCache] thumbImageForRequest: request];
-//    
-//    //set title
-//    cell.textLabel.text = hotel.name;
-    
     return cell;
 }
 
@@ -239,6 +225,10 @@
     if (cell.selectionStyle != UITableViewCellSelectionStyleNone) {
         if (indexPath.row == _frc.fetchedObjects.count) {
             [self loadFeeds];
+        } else {
+            FeedDetailsViewController *vc = [[FeedDetailsViewController alloc] initWithStyle: UITableViewStylePlain];
+            vc.feedItem = [_frc objectAtIndexPath: indexPath];
+            [self.navigationController pushViewController: vc animated: YES];
         }
         [tableView deselectRowAtIndexPath: indexPath animated: YES];
     }

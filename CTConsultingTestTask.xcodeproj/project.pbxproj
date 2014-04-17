@@ -10,6 +10,9 @@
 		1726FA1318FF18CC00D0EA0F /* AuthentificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1726FA1218FF18CC00D0EA0F /* AuthentificationViewController.m */; };
 		1726FA1618FF214A00D0EA0F /* AuthentificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1726FA1518FF214A00D0EA0F /* AuthentificationManager.m */; };
 		1726FA1918FF30A400D0EA0F /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1726FA1818FF30A400D0EA0F /* FeedViewController.m */; };
+		2219727C19000FB60024A7B3 /* FeedDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2219727B19000FB60024A7B3 /* FeedDetailsViewController.m */; };
+		2219727F190010770024A7B3 /* FeedDetailedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2219727E190010770024A7B3 /* FeedDetailedCell.m */; };
+		22197283190012680024A7B3 /* NSObject+TextSizesComputer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22197282190012680024A7B3 /* NSObject+TextSizesComputer.m */; };
 		227100A018FEBF9700709E53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2271009F18FEBF9700709E53 /* Foundation.framework */; };
 		227100A218FEBF9700709E53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227100A118FEBF9700709E53 /* CoreGraphics.framework */; };
 		227100A418FEBF9700709E53 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227100A318FEBF9700709E53 /* UIKit.framework */; };
@@ -43,6 +46,12 @@
 		1726FA1518FF214A00D0EA0F /* AuthentificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthentificationManager.m; sourceTree = "<group>"; };
 		1726FA1718FF30A400D0EA0F /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		1726FA1818FF30A400D0EA0F /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		2219727A19000FB60024A7B3 /* FeedDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailsViewController.h; sourceTree = "<group>"; };
+		2219727B19000FB60024A7B3 /* FeedDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailsViewController.m; sourceTree = "<group>"; };
+		2219727D190010770024A7B3 /* FeedDetailedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedDetailedCell.h; sourceTree = "<group>"; };
+		2219727E190010770024A7B3 /* FeedDetailedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedDetailedCell.m; sourceTree = "<group>"; };
+		22197281190012680024A7B3 /* NSObject+TextSizesComputer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+TextSizesComputer.h"; sourceTree = "<group>"; };
+		22197282190012680024A7B3 /* NSObject+TextSizesComputer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TextSizesComputer.m"; sourceTree = "<group>"; };
 		2271009C18FEBF9700709E53 /* CTConsultingTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTConsultingTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2271009F18FEBF9700709E53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		227100A118FEBF9700709E53 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -184,10 +193,16 @@
 			children = (
 				1726FA1718FF30A400D0EA0F /* FeedViewController.h */,
 				1726FA1818FF30A400D0EA0F /* FeedViewController.m */,
+				2219727A19000FB60024A7B3 /* FeedDetailsViewController.h */,
+				2219727B19000FB60024A7B3 /* FeedDetailsViewController.m */,
 				22A1A8E118FFD12D00EC462A /* FeedDownloader.h */,
 				22A1A8E218FFD12D00EC462A /* FeedDownloader.m */,
 				22A1A8C918FFCB4400EC462A /* FeedCell.h */,
 				22A1A8CA18FFCB4400EC462A /* FeedCell.m */,
+				2219727D190010770024A7B3 /* FeedDetailedCell.h */,
+				2219727E190010770024A7B3 /* FeedDetailedCell.m */,
+				22197281190012680024A7B3 /* NSObject+TextSizesComputer.h */,
+				22197282190012680024A7B3 /* NSObject+TextSizesComputer.m */,
 				22A1A8DE18FFCC6F00EC462A /* PlaceHolderCell.h */,
 				22A1A8DF18FFCC6F00EC462A /* PlaceHolderCell.m */,
 				22A1A8CC18FFCB7D00EC462A /* ThumbCache.h */,
@@ -287,15 +302,18 @@
 				22A1A8BA18FFB26500EC462A /* FeedCaptionItem.m in Sources */,
 				22A1A8DC18FFCB7D00EC462A /* ThumbRequest.m in Sources */,
 				227100B018FEBF9800709E53 /* AppDelegate.m in Sources */,
+				2219727F190010770024A7B3 /* FeedDetailedCell.m in Sources */,
 				22A1A8D818FFCB7D00EC462A /* ThumbCache.m in Sources */,
 				22A1A8E318FFD12D00EC462A /* FeedDownloader.m in Sources */,
 				22A1A8D918FFCB7D00EC462A /* ThumbFetchOperation.m in Sources */,
 				22A1A8DB18FFCB7D00EC462A /* ThumbOperationQueue.m in Sources */,
+				22197283190012680024A7B3 /* NSObject+TextSizesComputer.m in Sources */,
 				1726FA1918FF30A400D0EA0F /* FeedViewController.m in Sources */,
 				22A1A8A418FFA95D00EC462A /* Model.xcdatamodeld in Sources */,
 				22A1A8B718FFB26500EC462A /* FeedRecord.m in Sources */,
 				1726FA1318FF18CC00D0EA0F /* AuthentificationViewController.m in Sources */,
 				1726FA1618FF214A00D0EA0F /* AuthentificationManager.m in Sources */,
+				2219727C19000FB60024A7B3 /* FeedDetailsViewController.m in Sources */,
 				22A1A8E018FFCC6F00EC462A /* PlaceHolderCell.m in Sources */,
 				22A1A8C418FFB35600EC462A /* User.m in Sources */,
 				22A1A8AE18FFB26400EC462A /* FeedCommentsItem.m in Sources */,

@@ -2,7 +2,7 @@
 //  FeedCommentsItem.h
 //  CTConsultingTestTask
 //
-//  Created by Ultimatum on 17.04.14.
+//  Created by Timur on 17.04.14.
 //  Copyright (c) 2014 Timur. All rights reserved.
 //
 
@@ -20,6 +20,6 @@ extern NSString *const FeedCommentsItemEntityName;
 @property (nonatomic, retain) NSString * createdTime;
 @property (nonatomic, retain) NSString * identifier;
 @property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSManagedObject *fromUser;
+@property (nonatomic, retain) User *fromUser;
 
 @end

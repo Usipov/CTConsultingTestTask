@@ -2,7 +2,7 @@
   Localizable.strings
   CTConsultingTestTask
 
-  Created by Ultimatum on 17.04.14.
+  Created by Timur on 17.04.14.
   Copyright (c) 2014 Timur. All rights reserved.
 */
 
@@ -10,7 +10,10 @@
 "feed" = "Feed";
 "tap to load" = "Tap to load more";
 "reached end" = "Feeds loaded: %i";
-"sing out" = "Sign out";
+"sign out" = "Sign out";
+"details" = "Details";
+"likes" = "      Likes (%i):\n";
+"comments" = "      Comments (%i):\n";
 
 "ErorrDescriptionWhileParsing" = "Failed to parse JSON";
 "ErrorFailureReasonWhileParsing" = "JSON parsing is not implemented within your iOS version";
