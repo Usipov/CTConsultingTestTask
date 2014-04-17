@@ -108,6 +108,7 @@
                 
                 //enable refresh button
                 self.navigationItem.rightBarButtonItem.enabled = YES;
+                self.navigationItem.leftBarButtonItem.enabled = YES;
             });
         });
     };
@@ -117,6 +118,7 @@
         //enable refresh button
         dispatch_async(dispatch_get_main_queue(), ^{
             self.navigationItem.rightBarButtonItem.enabled = YES;
+            self.navigationItem.leftBarButtonItem.enabled = YES;
         });
 
         //try loading later
@@ -130,6 +132,7 @@
             _nextMaxID = lastRecord.identifier;
         }
         self.navigationItem.rightBarButtonItem.enabled = NO;
+        self.navigationItem.leftBarButtonItem.enabled = NO;
         [FeedDownloader.sharedLoader loadFeedTilID: _nextMaxID withFinishBlock: finishBLock failBlock: failBlock];
     }
 }
