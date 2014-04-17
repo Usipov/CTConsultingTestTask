@@ -7,17 +7,52 @@
 //
 
 #import "AppDelegate.h"
+#import "AuthentificationManager.h"
+#import "AuthentificationViewController.h"
+#import "FeedViewController.h"
+
+#define kObservedKeyPath @"userToken"
+
+@interface AppDelegate ()
+-(UIViewController *)viewControllerBasedOnAuthentificationState;
+-(void)handleAuthentificationStateChange: (NSNotification *)sender;
+@end
+
+#pragma mark -
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController: [self viewControllerBasedOnAuthentificationState]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(handleAuthentificationStateChange:) name: AuthentificationStateDidChangeNotification object: nil];
+    
     return YES;
 }
+
+-(UIViewController *)viewControllerBasedOnAuthentificationState
+{
+    UIViewController *vc = nil;
+    
+    if (! AuthentificationManager.sharedManager.userToken) {
+        vc = [AuthentificationViewController new];
+    } else {
+        vc = [[FeedViewController alloc] initWithStyle: UITableViewStylePlain];
+    }
+    return vc;
+}
+
+-(void)handleAuthentificationStateChange: (NSNotification *)sender
+{
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController: [self viewControllerBasedOnAuthentificationState]];
+}
+
+#pragma mark -
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -43,7 +78,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSNotificationCenter defaultCenter] postNotificationName: kApplicationWillTerminateNotification object: nil userInfo: nil];
 }
 
 @end
