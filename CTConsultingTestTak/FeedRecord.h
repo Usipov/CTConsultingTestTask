@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, VideoResolutionType) {
 
 
 
-@class FeedCommentsItem, User, FeedCaptionItem, ImageData;
+@class FeedCommentsItem, User, FeedCaptionItem, ImageData, VideoData;
 
 @interface FeedRecord : NSManagedObject
 
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSUInteger, VideoResolutionType) {
 +(void)deleteAllInManagedObjectContext: (NSManagedObjectContext *)context;
 +(NSFetchedResultsController *)fetchedResultsContollerInManagedObjectContext: (NSManagedObjectContext *)context;
 -(ImageData *)imageDataForImageQuality: (ImageQuality)quality;
--(ImageData *)videoDataForVideoResolution: (VideoResolutionType)resolution;
+-(VideoData *)videoDataForVideoResolution: (VideoResolutionType)resolution;
 
 @end
 

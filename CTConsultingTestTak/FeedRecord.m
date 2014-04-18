@@ -148,7 +148,7 @@ NSString *const FeedRecordCacheName = @"FeedRecordCache";
     return data;
 }
 
--(ImageData *)videoDataForVideoResolution: (VideoResolutionType)resolution
+-(VideoData *)videoDataForVideoResolution: (VideoResolutionType)resolution
 {
     NSString *key;
     
