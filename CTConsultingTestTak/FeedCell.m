@@ -84,10 +84,10 @@ CGFloat const FeedCellHeight = 364.0f;
     CGRect contentThumbFrame;
     contentThumbFrame.origin.x = 0.0;
     contentThumbFrame.origin.y = CGRectGetMaxY(self.textLabel.bounds);
-    contentThumbFrame.size.width = CGRectGetWidth(self.bounds);
+    contentThumbFrame.size.width = 320.0f;
     contentThumbFrame.size.height = FeedCellHeight - contentThumbFrame.origin.y;
     self.contentPreviewView.frame = contentThumbFrame;
-    
+    self.contentPreviewView.center = CGPointMake(CGRectGetMidX(self.bounds), self.contentPreviewView.center.y);
 }
 
 @end
