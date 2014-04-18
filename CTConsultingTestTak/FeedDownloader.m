@@ -98,18 +98,18 @@
                     }
                 }
             }
-        }
-    } else {
-        //parsing for iOS 4 is not implemented within a test task
-        if (self.failBlock) {
-            NSDictionary *errorInfo = @{
-                                        NSLocalizedDescriptionKey : NSLocalizedString(@"ErorrDescriptionWhileParsing", nil),
-                                        NSLocalizedFailureReasonErrorKey : NSLocalizedString(@"ErrorFailureReasonWhileParsing", nil)
-                                        };
-            
-            NSError *error = [NSError errorWithDomain: kErrorDomain code: 0 userInfo: errorInfo];
-            
-            self.failBlock(error);
+        }  else {
+            //parsing for iOS 4 is not implemented within a test task
+            if (self.failBlock) {
+                NSDictionary *errorInfo = @{
+                                            NSLocalizedDescriptionKey : NSLocalizedString(@"ErorrDescriptionWhileParsing", nil),
+                                            NSLocalizedFailureReasonErrorKey : NSLocalizedString(@"ErrorFailureReasonWhileParsing", nil)
+                                            };
+                
+                NSError *error = [NSError errorWithDomain: kErrorDomain code: 0 userInfo: errorInfo];
+                
+                self.failBlock(error);
+            }
         }
     }
     
