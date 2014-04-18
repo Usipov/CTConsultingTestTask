@@ -167,8 +167,8 @@ NSString *const FeedRecordCacheName = @"FeedRecordCache";
     
     VideoData *data = [VideoData new];
     data.url = self.videos[key][@"url"];
-    data.size = CGSizeMake([self.images[key][@"width"] floatValue],
-                           [self.images[key][@"height"] floatValue]);
+    data.size = CGSizeMake([self.videos[key][@"width"] floatValue],
+                           [self.videos[key][@"height"] floatValue]);
     
     return data;
 }
