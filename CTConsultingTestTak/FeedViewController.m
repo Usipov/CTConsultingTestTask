@@ -17,7 +17,6 @@
 #import "FeedDetailsViewController.h"
 
 @interface FeedViewController () <NSFetchedResultsControllerDelegate> {
-    UITableView *_tableView;
     NSFetchedResultsController *_frc;
     __block NSString *_nextMaxID;
     __block BOOL _shouldSeekForMaxID;
